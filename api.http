@@ -2,3 +2,11 @@ GET http://localhost:3031/hello
 
 ###
 GET http://localhost:3031/afflistetaches
+###
+POST http://localhost:3031/add/:nomtache
+
+###
+POST http://localhost:3031/add/manger des pommes
+
+###
+GET http://localhost:3031/todos

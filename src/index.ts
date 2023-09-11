@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import "dotenv/config";
 import { DataTypes, Sequelize } from "sequelize"
 
@@ -36,6 +36,10 @@ async function auth(){
 }
 // auth()
 
+app.get("/", (_, res) => { 
+  res.send("hello");        
+});  
+
 app.get("/hello", (_, res) => { 
     res.send("hello");        
 });  
@@ -45,4 +49,14 @@ app.get("/afflistetaches", async (_, res) => {
   res.send(maListeDeTache);
 });
 
+app.post("/add/:nomtache", async (req, res) => {
+  creertache.create({name : req.params.nomtache, status : false})
+  res.sendStatus(200);
+});
+
+app.get("/todos", async (req, res) =>{
+  const todos = await creertache.findAll();
+  console.log(JSON.stringify(todos))
+  res.status(200).send(JSON.stringify(todos))
+})
 app.listen( port,  () =>   console.log(`Server is listening on port ${port}`) );
