@@ -1,6 +1,7 @@
 import express, { response } from "express";
 import "dotenv/config";
-import { DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Model, Sequelize } from "sequelize"
+import { ALL } from "dns";
 
 const app = express();
 const port = process.env.PORT as string;
@@ -59,4 +60,29 @@ app.get("/todos", async (req, res) =>{
   console.log(JSON.stringify(todos))
   res.status(200).send(JSON.stringify(todos))
 })
+
+app.put("/update/:id/:nouvel_etat", async(req, res)=>{
+
+  let id_to_modify= req.params.id;
+  let new_state = req.params.nouvel_etat;
+
+  await creertache.update({ status : new_state }, {
+    where: {
+      id: id_to_modify
+    }
+  });
+  res.status(200);
+})
+
+app.delete("/remove/:id",async(req, res)=>{
+  let id_to_delete= req.params.id;
+
+  await creertache.destroy({
+    where: {
+      id: id_to_delete
+    }
+  });
+  res.status(200);
+})
+
 app.listen( port,  () =>   console.log(`Server is listening on port ${port}`) );

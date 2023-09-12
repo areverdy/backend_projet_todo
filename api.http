@@ -10,3 +10,9 @@ POST http://localhost:3031/add/manger des pommes
 
 ###
 GET http://localhost:3031/todos
+
+###
+PUT http://localhost:3031/update/5/1
+
+###
+DELETE  http://localhost:3031/remove/6
